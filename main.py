@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from openai import OpenAI
 
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="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")
 
 def extract_text_from_doc(doc_url):
     try:
