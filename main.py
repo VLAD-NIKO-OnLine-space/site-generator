@@ -4,8 +4,15 @@ from bs4 import BeautifulSoup
 from openai import OpenAI
 
 
-client = OpenAI(api_key="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")
+OPENAI_API_KEY = "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"
 
+PROJECT_ID = "proj_ZA6skTuKlWmJKqoiiw8Y7YOv"
+
+
+client = OpenAI(
+    api_key=OPENAI_API_KEY,
+    project=PROJECT_ID  # обязательное поле для project-based ключей
+)
 def extract_text_from_doc(doc_url):
     try:
         doc_id = doc_url.split("/d/")[1].split("/")[0]
@@ -27,7 +34,9 @@ SEO Audit:
 Requirements:
 - Language: {language}
 - Include <title> and meta description
+- Include header(with burger menu) and footer(with logo) with a anchor links
 - Use H1–H3 headings with keywords
+- Generate and pass image into the sections 
 - Sections: Hero, Services, About, CTA, FAQ
 - Clean, minimal HTML (inline CSS or Tailwind)
 - Output only HTML code, no explanations
@@ -38,8 +47,8 @@ Requirements:
             messages=[
                 {"role": "user", "content": prompt}
             ],
-        temperature=0.6
-    )
+            temperature=0.6
+        )
         return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"[!] OpenAI error:\n    {e}")
